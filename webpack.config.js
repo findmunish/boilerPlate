@@ -7,10 +7,18 @@
 // }
 
 function buildConfig(env) {
-    if ( ((env.toLowerCase()) === 'dev') || ((env.toLowerCase()) === 'prod') ) {
-        return require('./webpack.' + env + '.config.js')();
-    } else {
-        console.log("Wrong webpack build parameter. Please pass on env parameter as 'dev' or 'prod'!");
+    const envName =
+      typeof env === 'string'
+        ? env
+        : env && typeof env === 'object'
+          ? (env.dev && 'dev') || (env.prod && 'prod') || env.MODE || env.mode
+          : undefined;
+
+    if (envName && (envName.toLowerCase() === 'dev' || envName.toLowerCase() === 'prod')) {
+        return require('./webpack.' + envName + '.config.js')();
     }
+
+    console.log("Wrong webpack build parameter. Please pass env as 'dev' or 'prod' (e.g. --env dev).");
 }
+
 module.exports = buildConfig;

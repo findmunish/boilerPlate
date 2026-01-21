@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-    entry: ['babel-polyfill', './src/index.js'],
+    entry: ['core-js/stable', 'regenerator-runtime/runtime', './src/index.js'],
     output: {
         path: path.resolve(__dirname, 'public/scripts'),
         filename: 'bundle.js'
@@ -13,16 +13,21 @@ module.exports = {
             use: {
                 loader: 'babel-loader',
                 options: {
-                    presets: ['env'],
-                    plugins: ['transform-object-rest-spread']
+                    presets: [
+                        ['@babel/preset-env', { useBuiltIns: 'entry', corejs: 3 }]
+                    ]
                 }
             }
         }]
     },
     plugins:[],
     devServer: {
-        contentBase: path.join(__dirname,  'public'),
-        publicPath: '/scripts/'
+        static: {
+            directory: path.join(__dirname, 'public')
+        },
+        devMiddleware: {
+            publicPath: '/scripts/'
+        }
     },
     devtool: 'source-map'
 }
