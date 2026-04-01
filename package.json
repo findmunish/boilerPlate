@@ -21,10 +21,13 @@
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.3"
   },
-  "devDependencies": {
-    "minimatch": ">=10.2.1"
-  },
+  "devDependencies": {},
   "overrides": {
-    "minimatch": ">=10.2.1"
+    "brace-expansion": "5.0.5",
+    "minimatch": "10.2.3",
+    "path-to-regexp": "0.1.13",
+    "picomatch": "2.3.2",
+    "serialize-javascript": "7.0.5",
+    "terser-webpack-plugin": "5.3.17"
   }
 }
